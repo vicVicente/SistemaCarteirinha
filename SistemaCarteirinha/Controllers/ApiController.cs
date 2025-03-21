@@ -1,28 +1,37 @@
-﻿using System.Web.Mvc;
-
+﻿using System.Text.Json;
+using Microsoft.AspNetCore.Mvc;
+using SistemaCarteirinha.Models;
+using SistemaCarteirinha.Service;
 
 namespace SistemaCarteirinha.Controllers;
 
 public class ApiController : Controller
 {
-    [HttpGet]
-    public ActionResult BuscarClientes()
-    {
+    private readonly PessoaService _pessoaService = new();
 
-        return null; // RedirectToAction("Index", "Home");
+    public JsonResult BuscarClientes()
+    {
+        try
+        {
+            List<Pessoa> listPessoa = _pessoaService.GetAll();
+
+            Console.WriteLine(JsonSerializer.Serialize(listPessoa));
+
+            return Json(new { listPessoa });
+        }
+        catch (Exception ex)
+        {
+            return Json(new { error = ex.Message });
+        }
     }
 
-    [HttpPost]
-    public ActionResult CadastroPF()
-    {
 
-        return null; // RedirectToAction("Index", "Home");
-    }
 
     [HttpPost]
-    public ActionResult CadastroPJ()
+    public ActionResult Cadastro(Pessoa Pf)
     {
+        _pessoaService.Insert(Pf);
 
-        return null; // RedirectToAction("Index", "Home");
+        return RedirectToAction("Index", "Home");
     }
 }

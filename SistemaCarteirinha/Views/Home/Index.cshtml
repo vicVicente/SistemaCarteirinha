@@ -1,4 +1,6 @@
-﻿@{
+﻿@model SistemaCarteirinha.Models.Pessoa
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -26,55 +28,50 @@
 </div>
 
 <div style="padding: 40px">
-    <table id="tbHeader" class="display" cellspacing="0" width="1000">
-        <br />
-
+    <table id="tabelaClientes" class="display" cellspacing="0" width="1000">
         <thead>
             <tr>
                 <th class="sorting">Cpf</th>
                 <th class="sorting">Nome</th>
+                <th class="sorting">Rg</th>
                 <th class="sorting">Cnpj</th>
                 <th class="sorting">Razao_social</th>
-                <th class="sorting">excluir</th>
+                <th class="sorting">Nome_fantasia</th>
             </tr>
         </thead>
     </table>
 </div>
 
 @section Scripts {
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script>
         $(document).ready(function () {
-            var url = "@Url.Action("BuscarClientes", "Api")";
+            var url = @Url.Action("BuscarClientes", "Api");
 
-            $("#tbHeader").DataTable({
+            $("#tabelaClientes").DataTable({
                 "pageLength": 10,
                 "ajax": {
                     "url": url,
                     "type": "GET",
-                    "datatype": "json",
+                    "datatype": "json"
                 },
                 "columns": [
-                    { "data": "Cpf", "autowidth": true },
-                    { "data": "Nome", "autowidth": true },
-                    { "data": "Cnpj", "autowidth": true },
-                    { "data": "Razão Social", "autowidth": true },
-                    {
-                        "data": "excluir", "autowidth": true, "orderable": false,
-                        "render": function (data, type, full) {
-                            return '<a class="btn btn-link btn-sm fa fa-trash-o" href="#" onclick="DeletarHeader(' + full.cod_header + ')"></a>';
-                        }
-                    }
+                    { "data": "Cpf", "title": "CPF",    "targets": 0, "autowidth": true },
+                    { "data": "Nome", "title": "Nome",  "targets": 1, "autowidth": true },
+                    { "data": "Rg", "title": "RG",      "targets": 2, "autowidth": true },
+                    { "data": "Cnpj", "title": "CNPJ",  "targets": 3, "autowidth": true },
+                    { "data": "RazaoSocial", "title": "Razão Social",   "targets": 4, "autowidth": true },
+                    { "data": "NomeFantasia", "title": "Nome Fantasia", "targets": 5, "autowidth": true }
                 ],
                 "oLanguage": {
                     "sProcessing": "A processar...",
-                    "sLengthMenu": "Mostrar _MENU_ registos",
+                    "sLengthMenu": "Mostrar _MENU_ registros",
                     "sZeroRecords": "Não foram encontrados resultados",
-                    "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registos",
-                    "sInfoEmpty": "Mostrando de 0 até 0 de 0 registos",
-                    "sInfoFiltered": "(filtrado de _MAX_ registos no total)",
+                    "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                    "sInfoEmpty": "Mostrando de 0 até 0 de 0 registros",
+                    "sInfoFiltered": "(filtrado de _MAX_ registros no total)",
                     "sSearch": "Procurar:",
                     "oPaginate": {
                         "sFirst": "Primeiro",
@@ -85,6 +82,7 @@
                 }
             });
         });
+
     </script>
 }
 

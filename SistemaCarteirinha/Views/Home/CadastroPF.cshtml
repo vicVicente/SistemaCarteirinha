@@ -5,68 +5,73 @@
     <h1 class="display-4">Cadastro de Clientes (PF)</h1>
 </div>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Cadastro", "Api", FormMethod.Post))
 {
     <div class="form-group row">
         <label class="col-md-2 col-form-label text-left">Cpf*:</label>
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Cpf, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+            @Html.EditorFor(model => model.Cpf, new { htmlAttributes = new { @class = "form-control", required = "required", maxlength = "11" } })
         </div>
     </div><br />
 
     <div class="form-group row">
         <label class="col-md-2 col-form-label text-left">Nome*:</label>
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+            @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control", required = "required" }, maxlength = "50" })
         </div>
     </div><br />
 
     <div class="form-group row">
         <label class="col-md-2 col-form-label text-left">Sexo:</label>
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Sexo, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.DropDownListFor(model => model.Sexo,
+                     new SelectList(new[] {
+        new { Value = "M", Text = "Masculino" },
+        new { Value = "F", Text = "Feminino" },
+        new { Value = "N", Text = "NDA" }
+        }, "Value", "Text"), new { @class = "form-control" })
         </div>
     </div><br />
+
 
     <div class="form-group row">
         <label class="col-md-2 col-form-label text-left">Data Nascimento:</label>
         <div class="col-md-10">
-            @Html.EditorFor(model => model.DtNascimento, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.DtNascimento, new { htmlAttributes = new { @class = "form-control", type = "date" } })
         </div>
     </div><br />
 
     <div class="form-group row">
         <label class="col-md-2 col-form-label text-left">Rg:</label>
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Rg, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.Rg, new { htmlAttributes = new { @class = "form-control", maxlength = "8" } })
         </div>
     </div><br />
 
     <div class="form-group row">
         <label class="col-md-2 col-form-label text-left">Endereço:</label>
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Endereco, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.Endereco, new { htmlAttributes = new { @class = "form-control", maxlength = "50" } })
         </div>
     </div><br />
 
     <div class="form-group row">
         <label class="col-md-2 col-form-label text-left">Telefone:</label>
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Telefone, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.Telefone, new { htmlAttributes = new { @class = "form-control", maxlength = "11" } })
         </div>
     </div><br />
 
     <div class="form-group row">
         <label class="col-md-2 col-form-label text-left">E-mail:</label>
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", maxlength = "50" } })
         </div>
     </div><br />
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <button href="Home.cshtml" class="btn btn-default botoes">Voltar</button>
-            <input type="submit" value="Enviar" class="btn btn-default botoes" />
+            <input type="submit" value="Enviar" class="btn btn-primary" />
         </div>
     </div>
 }

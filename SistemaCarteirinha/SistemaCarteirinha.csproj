@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Service\PessoaFisicaService.cs" />
+    <Compile Remove="Service\PessoaJuridicaService.cs" />
     <Compile Remove="Views\Home\Cadastrar.cshtml.cs" />
     <Compile Remove="Views\Home\CadastroPJ.cs" />
   </ItemGroup>
@@ -19,6 +21,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.3.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.7" />
+    <PackageReference Include="MySql.Data" Version="9.2.0" />
   </ItemGroup>
 
 </Project>
