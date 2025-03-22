@@ -15,15 +15,16 @@ public class ApiController : Controller
         {
             List<Pessoa> listPessoa = _pessoaService.GetAll();
 
-            Console.WriteLine(JsonSerializer.Serialize(listPessoa));
+            Console.WriteLine(JsonSerializer.Serialize(new { data = listPessoa }));
 
-            return Json(new { listPessoa });
+            return Json(new { data = listPessoa });
         }
         catch (Exception ex)
         {
             return Json(new { error = ex.Message });
         }
     }
+
 
 
 

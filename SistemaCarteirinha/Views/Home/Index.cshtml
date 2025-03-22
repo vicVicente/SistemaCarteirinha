@@ -43,27 +43,28 @@
 </div>
 
 @section Scripts {
-    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 
     <script>
         $(document).ready(function () {
-            var url = @Url.Action("BuscarClientes", "Api");
+            var url = "@Url.Action("BuscarClientes", "Api")";
 
             $("#tabelaClientes").DataTable({
                 "pageLength": 10,
                 "ajax": {
                     "url": url,
                     "type": "GET",
-                    "datatype": "json"
+                    "datatype": "json",
+                    "dataSrc": "data"
                 },
                 "columns": [
-                    { "data": "Cpf", "title": "CPF",    "targets": 0, "autowidth": true },
-                    { "data": "Nome", "title": "Nome",  "targets": 1, "autowidth": true },
-                    { "data": "Rg", "title": "RG",      "targets": 2, "autowidth": true },
-                    { "data": "Cnpj", "title": "CNPJ",  "targets": 3, "autowidth": true },
-                    { "data": "RazaoSocial", "title": "Razão Social",   "targets": 4, "autowidth": true },
-                    { "data": "NomeFantasia", "title": "Nome Fantasia", "targets": 5, "autowidth": true }
+                    { "data": "cpf", "title": "CPF" },
+                    { "data": "nome", "title": "Nome" },
+                    { "data": "rg", "title": "RG" },
+                    { "data": "cnpj", "title": "CNPJ" },
+                    { "data": "razaoSocial", "title": "Razão Social" },
+                    { "data": "nomeFantasia", "title": "Nome Fantasia" }
                 ],
                 "oLanguage": {
                     "sProcessing": "A processar...",
@@ -82,7 +83,6 @@
                 }
             });
         });
-
     </script>
 }
 
