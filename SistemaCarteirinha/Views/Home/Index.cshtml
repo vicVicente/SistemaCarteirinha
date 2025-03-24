@@ -4,20 +4,6 @@
     ViewData["Title"] = "Home Page";
 }
 
-<style>
-    table {
-        width: 80%;
-        margin: auto;
-        border-collapse: collapse;
-    }
-
-    th, td {
-        border: 1px solid black;
-        padding: 8px;
-        text-align: center;
-    }
-</style>
-
 <div class="text-center">
     <h1 class="display-4">Lista de Clientes</h1>
 </div>
@@ -35,54 +21,32 @@
                 <th class="sorting">Nome</th>
                 <th class="sorting">Rg</th>
                 <th class="sorting">Cnpj</th>
-                <th class="sorting">Razao_social</th>
-                <th class="sorting">Nome_fantasia</th>
+                <th class="sorting">Razao Social</th>
+                <th class="sorting">Nome Fantasia</th>
+                <th class="sorting">Ações</th>
             </tr>
         </thead>
     </table>
 </div>
 
+<div id="ModalDetalhes" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header d-flex justify-content-between align-items-center">
+                <h5 class="modal-title mx-auto">Detalhes</h5>
+                <button type="button" class="close" onclick="fecharModal()" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body"></div>
+        </div>
+    </div>
+</div>
+
 @section Scripts {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-
-    <script>
-        $(document).ready(function () {
-            var url = "@Url.Action("BuscarClientes", "Api")";
-
-            $("#tabelaClientes").DataTable({
-                "pageLength": 10,
-                "ajax": {
-                    "url": url,
-                    "type": "GET",
-                    "datatype": "json",
-                    "dataSrc": "data"
-                },
-                "columns": [
-                    { "data": "cpf", "title": "CPF" },
-                    { "data": "nome", "title": "Nome" },
-                    { "data": "rg", "title": "RG" },
-                    { "data": "cnpj", "title": "CNPJ" },
-                    { "data": "razaoSocial", "title": "Razão Social" },
-                    { "data": "nomeFantasia", "title": "Nome Fantasia" }
-                ],
-                "oLanguage": {
-                    "sProcessing": "A processar...",
-                    "sLengthMenu": "Mostrar _MENU_ registros",
-                    "sZeroRecords": "Não foram encontrados resultados",
-                    "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
-                    "sInfoEmpty": "Mostrando de 0 até 0 de 0 registros",
-                    "sInfoFiltered": "(filtrado de _MAX_ registros no total)",
-                    "sSearch": "Procurar:",
-                    "oPaginate": {
-                        "sFirst": "Primeiro",
-                        "sPrevious": "Anterior",
-                        "sNext": "Seguinte",
-                        "sLast": "Último"
-                    }
-                }
-            });
-        });
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+    <script src="~/js/index.js"></script>
 }
-

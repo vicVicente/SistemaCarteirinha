@@ -1,5 +1,5 @@
-﻿using MySql.Data.MySqlClient;
-using SistemaCarteirinha.Models;
+﻿using SistemaCarteirinha.Models;
+using MySql.Data.MySqlClient;
 
 namespace SistemaCarteirinha.Mapping;
 
@@ -9,6 +9,7 @@ public class Mapeamento
     {
         return new Pessoa
         {
+            Id = reader.GetInt64("ID_CLIENTE"),
             Cpf = reader.IsDBNull(reader.GetOrdinal("CPF")) ? "-" : reader.GetString("CPF"),
             Nome = reader.IsDBNull(reader.GetOrdinal("NOME")) ? "-" : reader.GetString("NOME"),
             Sexo = reader.IsDBNull(reader.GetOrdinal("SEXO")) ? "-" : reader.GetString("SEXO"),

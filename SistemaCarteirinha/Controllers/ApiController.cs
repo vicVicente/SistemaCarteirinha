@@ -1,7 +1,6 @@
-﻿using System.Text.Json;
-using Microsoft.AspNetCore.Mvc;
+﻿using SistemaCarteirinha.Service;
 using SistemaCarteirinha.Models;
-using SistemaCarteirinha.Service;
+using Microsoft.AspNetCore.Mvc;
 
 namespace SistemaCarteirinha.Controllers;
 
@@ -15,8 +14,6 @@ public class ApiController : Controller
         {
             List<Pessoa> listPessoa = _pessoaService.GetAll();
 
-            Console.WriteLine(JsonSerializer.Serialize(new { data = listPessoa }));
-
             return Json(new { data = listPessoa });
         }
         catch (Exception ex)
@@ -25,14 +22,27 @@ public class ApiController : Controller
         }
     }
 
-
+    [HttpPost]
+    public JsonResult Cadastro(Pessoa Pessoa)
+    {
+        try
+        {
+            _pessoaService.Insert(Pessoa);
+            return Json(new { success = true, message = "Cadastro realizado com sucesso!" });
+        }
+        catch (Exception ex)
+        {
+            return Json(new { success = false, message = "Erro ao cadastrar: " + ex.Message });
+        }
+    }
 
 
     [HttpPost]
-    public ActionResult Cadastro(Pessoa Pf)
+    public ActionResult Deletar(long id)
     {
-        _pessoaService.Insert(Pf);
+        _pessoaService.Delete(id);
 
         return RedirectToAction("Index", "Home");
     }
+
 }

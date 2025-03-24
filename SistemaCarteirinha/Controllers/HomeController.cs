@@ -31,6 +31,12 @@ namespace SistemaCarteirinha.Controllers
         {
             return View();
         }
+        
+        public IActionResult Detalhes()
+        {
+            var pessoa = new Pessoa();
+            return View(pessoa);
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

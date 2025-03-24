@@ -57,4 +57,41 @@ public class DataDAO
         }
         return listaPessoa;
     }
+
+    public void Delete(long id)
+    {
+        using MySqlConnection conn = new(_connectionString);
+        {
+            conn.Open();
+
+            string sql = @"DELETE FROM PESSOA WHERE ID_CLIENTE = @id;";
+
+            using MySqlCommand cmd = new(sql, conn);
+            {
+                cmd.Parameters.AddWithValue("@id", id);
+
+                cmd.ExecuteNonQuery();
+            }
+        }
+    }
+
+    public bool ExisteCpfOuCnpj(string? cpf, string? cnpj)
+    {
+        using MySqlConnection conn = new(_connectionString);
+        {
+            conn.Open();
+
+            string sql = @"SELECT COUNT(*) FROM PESSOA WHERE CPF = @Cpf OR CNPJ = @Cnpj";
+            using MySqlCommand cmd = new(sql, conn);
+            {
+                cmd.Parameters.AddWithValue("@Cpf", cpf ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@Cnpj", cnpj ?? (object)DBNull.Value);
+
+                long count = (long)cmd.ExecuteScalar();
+                return count > 0;
+            }
+        }
+    }
+
+
 }

@@ -1,9 +1,8 @@
-﻿using System.Text.Json.Serialization;
-
-namespace SistemaCarteirinha.Models;
+﻿namespace SistemaCarteirinha.Models;
 
 public class Pessoa
 {
+    public long? Id { get; set; }
     public string? Cpf { get; set; }
     public string? Nome { get; set; }
     public string? Sexo { get; set; }
